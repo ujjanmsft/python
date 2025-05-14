@@ -20,4 +20,4 @@ while True:
 #    Terminate the program
     else:
 #    Print invalid choice
-        print("Invalid choice. Please enter 'y' or 'n'.")
+        print("Invalid choice! Please enter 'y' or 'n'.")
