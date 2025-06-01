@@ -28,14 +28,21 @@ def render_navbar(current_path):
         )
 
     return html.Div([
-        link('Home', '/', 'fas fa-home'),
-        link('About Us', '/about', 'fas fa-info-circle'),
-        link('Contact Us', '/contact', 'fas fa-envelope'),
-        link('Dashboard', '/dashboard', 'fas fa-chart-line'),
-        link('FAQ', '/faq', 'fas fa-question-circle'),
-        link('Services', '/services', 'fas fa-cogs'),
-        link('Feedback', '/feedback', 'fas fa-comment')
+        html.Div([
+            html.Img(src='/assets/logo.png', style={'height': '40px', 'margin-right': '10px'}),
+        ], style={'display': 'flex', 'alignItems': 'center', 'gap': '10px'}),
+
+        html.Div([
+            link('Home', '/', 'fas fa-home'),
+            link('About Us', '/about', 'fas fa-info-circle'),
+            link('Contact Us', '/contact', 'fas fa-envelope'),
+            link('Dashboard', '/dashboard', 'fas fa-chart-line'),
+            link('FAQ', '/faq', 'fas fa-question-circle'),
+            link('Services', '/services', 'fas fa-cogs'),
+            link('Feedback', '/feedback', 'fas fa-comment')
+        ], style={'margin-top': '10px', 'display': 'flex', 'flexWrap': 'wrap', 'gap': '10px'})
     ], className='navbar')
+
 
 # 🔧 Define layout with placeholders for URL-based content
 app.layout = html.Div([
