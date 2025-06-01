@@ -28,9 +28,7 @@ def render_navbar(current_path):
         )
 
     return html.Div([
-        html.Div([
-            html.Img(src='/assets/logo.png', style={'height': '40px', 'margin-right': '10px'}),
-        ], style={'display': 'flex', 'alignItems': 'center', 'gap': '10px'}),
+        html.Img(src='/assets/logo.png', style={'height': '100px'}),
 
         html.Div([
             link('Home', '/', 'fas fa-home'),
