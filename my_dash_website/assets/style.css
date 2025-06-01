@@ -1,0 +1,38 @@
+/* style.css */
+body {
+    font-family: 'segoe ui', sans-serif;
+    background-color: #fefefe;
+}
+
+/* Navigation Bar Styling*/
+.navbar {
+    background-color: #f1d3d3;
+    padding: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.navbar a {
+    color: #333;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.navbar a:hover {
+    background-color: #e8a9a9;
+    color: #000;
+    cursor: pointer;
+}
+
+.navbar a.active {
+    background-color: #c77474;
+    color: white;
+    font-weight: bold;
+}
