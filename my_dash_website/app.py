@@ -1,4 +1,3 @@
-# Import Dash modules
 from dash import Dash, html, dcc, Input, Output
 import pages.home as home
 import pages.about as about
@@ -10,33 +9,55 @@ import pages.feedback as feedback
 
 # Create Dash app and load optional external CSS
 app = Dash(__name__, suppress_callback_exceptions=True, external_stylesheets=[
-    'https://codepen.io/chriddyp/pen/bWLwgP.css'  # Bootstrap-like theme
+    'https://codepen.io/chriddyp/pen/bWLwgP.css',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css'
 ])
-server = app.server  # for deployment (e.g., Heroku, Render)
+server = app.server  # for deployment
 
-# Layout with navigation and page content container
+# 🔧 Function to render nav bar with active link
+def render_navbar(current_path):
+    def link(label, href, icon_class):
+        is_active = 'active' if current_path == href else ''
+        return dcc.Link(
+            html.Span([
+                html.I(className=icon_class),
+                f' {label}'
+            ]),
+            href=href,
+            className=is_active
+        )
+
+    return html.Div([
+        link('Home', '/', 'fas fa-home'),
+        link('About Us', '/about', 'fas fa-info-circle'),
+        link('Contact Us', '/contact', 'fas fa-envelope'),
+        link('Dashboard', '/dashboard', 'fas fa-chart-line'),
+        link('FAQ', '/faq', 'fas fa-question-circle'),
+        link('Services', '/services', 'fas fa-cogs'),
+        link('Feedback', '/feedback', 'fas fa-comment')
+    ], className='navbar')
+
+# 🔧 Define layout with placeholders for URL-based content
 app.layout = html.Div([
-    dcc.Location(id='url'),  # Tracks browser URL
-
-    # Navigation bar
-    html.Div([
-        dcc.Link('Home', href='/', style={'margin-right': '15px'}),
-        dcc.Link('About Us', href='/about', style={'margin-right': '15px'}),
-        dcc.Link('Contact Us', href='/contact', style={'margin-right': '15px'}),
-        dcc.Link('Dashboard', href='/dashboard', style={'margin-right': '15px'}),
-        dcc.Link('FAQ', href='/faq', style={'margin-right': '15px'}),
-        dcc.Link('Services', href='/services', style={'margin-right': '15px'}),
-        dcc.Link('Feedback', href='/feedback', style={'margin-right': '15px'}),
-    ], className='navbar'),
-
+    dcc.Location(id='url'),
+    html.Div(id='navbar-container'),
     html.Hr(),
-
-    html.Div(id='page-content', style={'padding': '20px'})  # where pages will render
+    html.Div(id='page-content', style={'padding': '20px'})
 ])
 
-# Callback: decide what content to show based on URL
-@app.callback(Output('page-content', 'children'), Input('url', 'pathname'))
+# 🔁 Callback to update navbar based on current URL
+@app.callback(
+    Output('navbar-container', 'children'),
+    Input('url', 'pathname')
+)
+def update_navbar(pathname):
+    return render_navbar(pathname)
+
+# 🔁 Callback to render pages
+@app.callback(
+    Output('page-content', 'children'),
+    Input('url', 'pathname')
+)
 def display_page(pathname):
     if pathname == '/about':
         return about.layout
@@ -51,8 +72,8 @@ def display_page(pathname):
     elif pathname == '/feedback':
         return feedback.layout
     else:
-        return home.layout  # default is home
+        return home.layout  # default
 
-# Run the app
+# 🚀 Run app
 if __name__ == '__main__':
     app.run(debug=True)
