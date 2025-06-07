@@ -1,3 +1,6 @@
+'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css'
+
+
 /* style.css */
 body {
     font-family: 'segoe ui', sans-serif;
@@ -50,4 +53,62 @@ body {
 .navbar a.active {
     background-color: #007BFF;
     color: white;
+}
+
+
+footer {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-top: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.footer-social-icons a {
+    color: #555;
+    margin-right: 10px;
+    transition: color 0.3s;
+}
+
+.footer-social-icons a:hover {
+    color: #007BFF;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .navbar img {
+        height: 60px;
+        margin-bottom: 10px;
+    }
+}
+
+.sidebar {
+    width: 220px;
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+    min-height: 100%;
+}
+
+.sidebar-link {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    transition: background-color 0.3s;
+}
+
+.sidebar-link:hover {
+    background-color: #ddd;
 }
